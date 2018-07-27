@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">InventoryApp</string>
+
+    <!-- Inventory Overview -->
+    <string name="inventory_overview">Inventory Overview</string>
+    <string name="hint_product_name">Product Name</string>
+    <string name="hint_product_price">Product Price</string>
+    <string name="hint_product_quantity">Quantity</string>
+
+    <!-- Supplier Overview -->
+    <string name="supplier_overview">Supplier Overview</string>
+    <string name="hint_supplier_name">Supplier Name</string>
+    <string name="hint_supplier_number">Supplier Number</string>
 </resources>
