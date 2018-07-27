@@ -9,12 +9,19 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.android.inventoryapp.data.InventoryContract.InventoryEntry;
 import com.example.android.inventoryapp.data.InventoryDbHelper;
 
 public class MainActivity extends AppCompatActivity {
+
+    private EditText mProductName;
+    private EditText mProductPrice;
+    private EditText mProductQuantity;
+    private EditText mSupplierName;
+    private EditText mSupplierNumber;
 
     private InventoryDbHelper mDbHelper;
 
@@ -28,28 +35,49 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                insertInventory();
+                Toast.makeText(MainActivity.this, "Inventory Saved", Toast.LENGTH_SHORT).show();
             }
         });
+
+        mProductName = (EditText)findViewById(R.id.edit_product_name);
+        mProductPrice = (EditText)findViewById(R.id.edit_product_price);
+        mProductQuantity = (EditText)findViewById(R.id.edit_product_quantity);
+        mSupplierName = (EditText)findViewById(R.id.edit_supplier_name);
+        mSupplierNumber = (EditText)findViewById(R.id.edit_supplier_number);
+
         mDbHelper = new InventoryDbHelper(this);
     }
 
     private void insertInventory(){
+        //Read from input fields
+        //Use trim to eliminate leading or trailing white space
+        String productNameString = mProductName.getText().toString().trim();
+        String productPriceString = mProductPrice.getText().toString().trim();
+        String productQuantityString = mProductQuantity.getText().toString().trim();
+        String supplierNameString = mSupplierName.getText().toString().trim();
+        String supplierNumberString = mSupplierNumber.getText().toString().trim();
+
+        InventoryDbHelper mDbHelper = new InventoryDbHelper(this);
+
         //Gets the data repository in write mode
         SQLiteDatabase db = mDbHelper.getWritableDatabase();
 
         ContentValues values = new ContentValues();
 
-        //Test values being used
-        values.put(InventoryEntry.COLUMN_PRODUCT_NAME, "Test Product Name");
-        values.put(InventoryEntry.COLUMN_PRODUCT_PRICE, "10");
-        values.put(InventoryEntry.COLUMN_PRODUCT_QUANTITY, "100");
-        values.put(InventoryEntry.COLUMN_PRODUCT_SUPPLIER_NAME, "TEST SUPPLIER");
-        values.put(InventoryEntry.COLUMN_PRODUCT_SUPPLIER_NUMBER, "12345678");
+        values.put(InventoryEntry.COLUMN_PRODUCT_NAME, productNameString);
+        values.put(InventoryEntry.COLUMN_PRODUCT_PRICE, productPriceString);
+        values.put(InventoryEntry.COLUMN_PRODUCT_QUANTITY, productQuantityString);
+        values.put(InventoryEntry.COLUMN_PRODUCT_SUPPLIER_NAME, supplierNameString);
+        values.put(InventoryEntry.COLUMN_PRODUCT_SUPPLIER_NUMBER, supplierNumberString);
 
         long newRowId = db.insert(InventoryEntry.TABLE_NAME, null, values);
 
-        Log.v("MainActivity", "New Row ID " + newRowId);
+        if(newRowId == -1){
+            Toast.makeText(this, "Error with saving inventory", Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(this, "Inventory saved with row id  " + newRowId, Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

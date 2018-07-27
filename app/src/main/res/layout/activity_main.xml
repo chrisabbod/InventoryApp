@@ -79,7 +79,7 @@
             <!-- Supplier Number field -->
             <EditText
                 android:id="@+id/edit_supplier_number"
-                android:hint="@string/hint_supplier_name"
+                android:hint="@string/hint_supplier_number"
                 android:inputType="number"
                 style="@style/EditorFieldStyle"/>
 
