@@ -14,10 +14,10 @@ public class InventoryDbHelper extends SQLiteOpenHelper {
     /**
      * Database version. If you change the database schema, you must increment the database version
      */
-    private static final int DaATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 1;
 
     public InventoryDbHelper(Context context){
-        super(context, DATABASE_NAME, null, DaATABASE_VERSION);
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override

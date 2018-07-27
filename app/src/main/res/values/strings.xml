@@ -11,4 +11,8 @@
     <string name="supplier_overview">Supplier Overview</string>
     <string name="hint_supplier_name">Supplier Name</string>
     <string name="hint_supplier_number">Supplier Number</string>
+
+    <!-- Menu Actions -->
+    <string name="action_insert_dummy_data">Insert Dummy Data</string>
+    <string name="action_delete_all_entries">Delete All Entries</string>
 </resources>
