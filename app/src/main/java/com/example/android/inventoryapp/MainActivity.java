@@ -1,12 +1,17 @@
 package com.example.android.inventoryapp;
 
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
+import com.example.android.inventoryapp.data.InventoryContract.InventoryEntry;
 import com.example.android.inventoryapp.data.InventoryDbHelper;
 
 public class MainActivity extends AppCompatActivity {
@@ -27,6 +32,24 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         mDbHelper = new InventoryDbHelper(this);
+    }
+
+    private void insertInventory(){
+        //Gets the data repository in write mode
+        SQLiteDatabase db = mDbHelper.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+
+        //Test values being used
+        values.put(InventoryEntry.COLUMN_PRODUCT_NAME, "Test Product Name");
+        values.put(InventoryEntry.COLUMN_PRODUCT_PRICE, "10");
+        values.put(InventoryEntry.COLUMN_PRODUCT_QUANTITY, "100");
+        values.put(InventoryEntry.COLUMN_PRODUCT_SUPPLIER_NAME, "TEST SUPPLIER");
+        values.put(InventoryEntry.COLUMN_PRODUCT_SUPPLIER_NUMBER, "12345678");
+
+        long newRowId = db.insert(InventoryEntry.TABLE_NAME, null, values);
+
+        Log.v("MainActivity", "New Row ID " + newRowId);
     }
 
     @Override
