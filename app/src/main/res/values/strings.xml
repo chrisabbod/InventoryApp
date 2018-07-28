@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">InventoryApp</string>
+    <string name="number_of_rows">Number of Rows</string>
 
     <!-- Inventory Overview -->
     <string name="inventory_overview">Inventory Overview</string>
@@ -13,6 +14,6 @@
     <string name="hint_supplier_number">Supplier Number</string>
 
     <!-- Menu Actions -->
-    <string name="action_insert_dummy_data">Insert Dummy Data</string>
+    <string name="action_save_data">Save Data</string>
     <string name="action_delete_all_entries">Delete All Entries</string>
 </resources>
