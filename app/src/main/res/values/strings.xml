@@ -22,4 +22,11 @@
     <string name="empty_view_subtitle_text">Get started by adding a product</string>
 
     <string name="unknown_supplier">Unknown Supplier</string>
+
+    <string name="editor_activity_title_new_inventory">Add a Product</string>
+    <string name="editor_activity_title_edit_product">Edit a Product</string>
+    <string name="editor_insert_product_failed">Error with saving product</string>
+    <string name="editor_insert_product_successful">Product Saved</string>
+    <string name="editor_update_product_failed">Error with updating product</string>
+    <string name="editor_update_product_successful">Product updated</string>
 </resources>

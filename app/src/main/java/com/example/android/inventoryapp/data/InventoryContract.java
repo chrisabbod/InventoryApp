@@ -60,5 +60,7 @@ public final class InventoryContract {
         public final static String COLUMN_PRODUCT_QUANTITY = "quantity";
         public final static String COLUMN_PRODUCT_SUPPLIER_NAME = "supplier_name";
         public final static String COLUMN_PRODUCT_SUPPLIER_NUMBER = "supplier_number";
+
+        public static final int SUPPLIER_NAME_UNKNOWN = 0;
     }
 }
