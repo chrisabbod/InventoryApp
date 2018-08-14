@@ -58,10 +58,10 @@ public class DetailActivity extends AppCompatActivity implements
         mCurrentInventoryUri = intent.getData();
 
         if(mCurrentInventoryUri == null){
-            setTitle(getString(R.string.editor_activity_title_new_inventory));
+            setTitle(getString(R.string.detail_activity_title_new_inventory));
             invalidateOptionsMenu();
         }else{
-            setTitle(getString(R.string.editor_activity_title_edit_product));
+            setTitle(getString(R.string.detail_activity_title_edit_product));
             getLoaderManager().initLoader(EXISTING_INVENTORY_LOADER, null, this);
         }
 
@@ -119,11 +119,11 @@ public class DetailActivity extends AppCompatActivity implements
             // Show a toast message depending on whether or not the insertion was successful.
             if (newUri == null) {
                 // If the new content URI is null, then there was an error with insertion.
-                Toast.makeText(this, getString(R.string.editor_insert_product_failed),
+                Toast.makeText(this, getString(R.string.detail_insert_product_failed),
                         Toast.LENGTH_SHORT).show();
             } else {
                 // Otherwise, the insertion was successful and we can display a toast.
-                Toast.makeText(this, getString(R.string.editor_insert_product_successful),
+                Toast.makeText(this, getString(R.string.detail_insert_product_successful),
                         Toast.LENGTH_SHORT).show();
             }
         }else{
@@ -136,11 +136,11 @@ public class DetailActivity extends AppCompatActivity implements
             // Show a toast message depending on whether or not the update was successful.
             if (rowsAffected == 0) {
                 // If no rows were affected, then there was an error with the update.
-                Toast.makeText(this, getString(R.string.editor_update_product_failed),
+                Toast.makeText(this, getString(R.string.detail_update_product_failed),
                         Toast.LENGTH_SHORT).show();
             } else {
                 // Otherwise, the update was successful and we can display a toast.
-                Toast.makeText(this, getString(R.string.editor_update_product_successful),
+                Toast.makeText(this, getString(R.string.detail_update_product_successful),
                         Toast.LENGTH_SHORT).show();
             }
         }
@@ -183,7 +183,7 @@ public class DetailActivity extends AppCompatActivity implements
             // Respond to a click on the "Delete" menu option
             case R.id.action_delete:
                 // Pop up confirmation dialog for deletion
-
+                deleteProduct();
                 return true;
             // Respond to a click on the "Up" arrow button in the app bar
             case android.R.id.home:
@@ -275,5 +275,32 @@ public class DetailActivity extends AppCompatActivity implements
         mProductQuantity.setText("");
         mSupplierName.setText("");
         mSupplierNumber.setText("");
+    }
+
+    /**
+     * Perform the deletion of the product in the database.
+     */
+    private void deleteProduct() {
+        // Only perform the delete if this is an existing pet.
+        if (mCurrentInventoryUri != null) {
+            // Call the ContentResolver to delete the product at the given content URI.
+            // Pass in null for the selection and selection args because the mCurrentInventoryUri
+            // content URI already identifies the product that we want.
+            int rowsDeleted = getContentResolver().delete(mCurrentInventoryUri, null, null);
+
+            // Show a toast message depending on whether or not the delete was successful.
+            if (rowsDeleted == 0) {
+                // If no rows were deleted, then there was an error with the delete.
+                Toast.makeText(this, getString(R.string.detail_delete_product_failed),
+                        Toast.LENGTH_SHORT).show();
+            } else {
+                // Otherwise, the delete was successful and we can display a toast.
+                Toast.makeText(this, getString(R.string.detail_delete_product_successful),
+                        Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        // Close the activity
+        finish();
     }
 }
