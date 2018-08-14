@@ -26,4 +26,11 @@
         <item name="android:fontFamily">sans-serif-light</item>
         <item name="android:textAppearance">?android:textAppearanceMedium</item>
     </style>
+
+    <!-- Theme of the DetailActivity -->
+    <style name="DetailTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/editorColorPrimary</item>
+        <item name="colorPrimaryDark">@color/editorColorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
 </resources>
