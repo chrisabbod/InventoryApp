@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">InventoryApp</string>
+    <string name="app_name">Inventory App</string>
     <string name="number_of_rows">Number of Rows</string>
 
     <!-- Inventory Overview -->
@@ -18,6 +18,9 @@
     <string name="action_insert_dummy_data">Insert Dummy Data</string>
     <string name="action_delete_all_entries">Delete All Entries</string>
 
+    <string name="list_price">$</string>
+    <string name="list_quantity">Quantity: </string>
+
     <string name="action_save">Save</string>
     <string name="action_delete">Delete</string>
 
@@ -35,4 +38,12 @@
     <string name="detail_update_product_successful">Product updated</string>
     <string name="detail_delete_product_failed">Error with deleting product</string>
     <string name="detail_delete_product_successful">Product deleted</string>
+
+    <string name="unsaved_changes_dialog_msg">Discard your changes and quit editing?</string>
+    <string name="discard">Discard</string>
+    <string name="keep_editing">Keep Editing</string>
+    <string name="delete_dialog_msg">Delete this product?</string>
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
+
 </resources>

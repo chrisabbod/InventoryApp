@@ -25,25 +25,23 @@ public class InventoryCursorAdapter extends CursorAdapter {
     @Override
     public void bindView(View view, Context context, Cursor cursor){
         // Find individual views that we want to modify in the list item layout
-        TextView nameTextView = (TextView) view.findViewById(R.id.name);
-        TextView priceTextView = (TextView) view.findViewById(R.id.price);
+        TextView productNameTextView = (TextView) view.findViewById(R.id.name);
+        TextView productPriceTextView = (TextView) view.findViewById(R.id.price);
+        TextView productQuantityTextView = (TextView)view.findViewById(R.id.quantity);
 
         // Find the columns of pet attributes that we're interested in
-        int nameColumnIndex = cursor.getColumnIndex(InventoryEntry.COLUMN_PRODUCT_NAME);
-        int breedColumnIndex = cursor.getColumnIndex(InventoryEntry.COLUMN_PRODUCT_PRICE);
+        int productNameColumnIndex = cursor.getColumnIndex(InventoryEntry.COLUMN_PRODUCT_NAME);
+        int productPriceColumnIndex = cursor.getColumnIndex(InventoryEntry.COLUMN_PRODUCT_PRICE);
+        int productQuantityColumnIndex = cursor.getColumnIndex(InventoryEntry.COLUMN_PRODUCT_QUANTITY);
 
         // Read the pet attributes from the Cursor for the current pet
-        String productName = cursor.getString(nameColumnIndex);
-        String productPrice = cursor.getString(breedColumnIndex);
+        String productName = cursor.getString(productNameColumnIndex);
+        String productPrice = cursor.getString(productPriceColumnIndex);
+        String productQuantity = cursor.getString(productQuantityColumnIndex);
 
-        // If the pet breed is empty string or null, then use some default text
-        // that says "Unknown Supplier", so the TextView isn't blank.
-//        if (TextUtils.isEmpty(supplierName)) {
-//            supplierName = context.getString(R.string.unknown_supplier);
-//        }
-
-        // Update the TextViews with the attributes for the current pet
-        nameTextView.setText(productName);
-        priceTextView.setText(productPrice);
+        // Update the TextViews with the attributes for the current product
+        productNameTextView.setText(productName);
+        productPriceTextView.setText("$" + productPrice);
+        productQuantityTextView.setText("Quantity:" + productQuantity);
     }
 }
