@@ -1,104 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+
+<!-- Layout for the list of pets -->
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp"
-    android:orientation="vertical"
-    tools:context=".MainActivity">
+    android:layout_height="match_parent">
+    <!--tools:context=".CatalogActivity">-->
 
-    <!-- Overview category -->
-    <LinearLayout
+    <ListView
+        android:id="@+id/list"
         android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </ListView>
+
+    <!-- Empty view for the list -->
+    <RelativeLayout
+        android:id="@+id/empty_view"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_centerInParent="true">
 
-        <!-- Label -->
-        <TextView
-            android:text="@string/inventory_overview"
-            style="@style/InventoryStyle" />
-
-        <!-- Input fields -->
-        <LinearLayout
+        <ImageView
+            android:id="@+id/empty_store_image"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_width="0dp"
-            android:layout_weight="2"
-            android:paddingLeft="4dp"
-            android:orientation="vertical">
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/ic_empty_store_icon"/>
 
-            <!-- Name field -->
-            <EditText
-                android:id="@+id/edit_product_name"
-                android:hint="@string/hint_product_name"
-                android:inputType="textCapWords"
-                style="@style/EditorFieldStyle" />
+        <TextView
+            android:id="@+id/empty_title_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/empty_store_image"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="sans-serif-medium"
+            android:paddingTop="16dp"
+            android:text="@string/empty_view_title_text"
+            android:textAppearance="?android:textAppearanceMedium"/>
 
-            <!-- Price field -->
-            <EditText
-                android:id="@+id/edit_product_price"
-                android:hint="@string/hint_product_price"
-                android:inputType="numberDecimal"
-                style="@style/EditorFieldStyle"/>
+        <TextView
+            android:id="@+id/empty_subtitle_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/empty_title_text"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="sans-serif"
+            android:paddingTop="8dp"
+            android:text="@string/empty_view_subtitle_text"
+            android:textAppearance="?android:textAppearanceSmall"
+            android:textColor="#A2AAB0"/>
+    </RelativeLayout>
 
-            <!-- Quantity field -->
-            <EditText
-                android:id="@+id/edit_product_quantity"
-                android:hint="@string/hint_product_quantity"
-                android:inputType="number"
-                style="@style/EditorFieldStyle" />
-        </LinearLayout>
-    </LinearLayout>
-    <!-- Supplier category -->
-    <LinearLayout
-        android:layout_width="match_parent"
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <!-- Label -->
-        <TextView
-            android:text="@string/supplier_overview"
-            style="@style/InventoryStyle" />
-
-        <!-- Input fields -->
-        <LinearLayout
-            android:layout_height="wrap_content"
-            android:layout_width="0dp"
-            android:layout_weight="2"
-            android:paddingLeft="4dp"
-            android:orientation="vertical">
-
-            <!-- Supplier Name field -->
-            <EditText
-                android:id="@+id/edit_supplier_name"
-                android:hint="@string/hint_supplier_name"
-                android:inputType="textCapWords"
-                style="@style/EditorFieldStyle" />
-
-            <!-- Supplier Number field -->
-            <EditText
-                android:id="@+id/edit_supplier_number"
-                android:hint="@string/hint_supplier_number"
-                android:inputType="number"
-                style="@style/EditorFieldStyle"/>
-
-        </LinearLayout>
-    </LinearLayout>
-    <!-- Supplier category -->
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <!-- Supplier Name field -->
-        <TextView
-            android:id="@+id/number_of_rows"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="TEST"
-            android:textSize="10sp"
-            style="@style/EditorFieldStyle"/>
-
-
-    </ScrollView>
-</LinearLayout>
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@drawable/ic_add_icon"/>
+</RelativeLayout>

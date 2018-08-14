@@ -16,4 +16,8 @@
     <!-- Menu Actions -->
     <string name="action_save_data">Save Data</string>
     <string name="action_delete_all_entries">Delete All Entries</string>
+
+    <!-- Empty View Strings -->
+    <string name="empty_view_title_text">Seems empty in here...</string>
+    <string name="empty_view_subtitle_text">Get started by adding a product</string>
 </resources>
