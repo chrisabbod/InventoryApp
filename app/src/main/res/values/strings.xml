@@ -20,4 +20,6 @@
     <!-- Empty View Strings -->
     <string name="empty_view_title_text">Seems empty in here...</string>
     <string name="empty_view_subtitle_text">Get started by adding a product</string>
+
+    <string name="unknown_supplier">Unknown Supplier</string>
 </resources>
