@@ -3,11 +3,13 @@ package com.example.android.inventoryapp;
 import android.app.LoaderManager;
 import android.content.ContentValues;
 import android.content.CursorLoader;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.Menu;
@@ -166,6 +168,50 @@ public class DetailActivity extends AppCompatActivity implements
             menuItem.setVisible(false);
         }
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // User clicked on a menu option in the app bar overflow menu
+        switch (item.getItemId()) {
+            // Respond to a click on the "Save" menu option
+            case R.id.action_save:
+                // Save product to database
+                savePet();
+                // Exit activity
+                finish();
+                return true;
+            // Respond to a click on the "Delete" menu option
+            case R.id.action_delete:
+                // Pop up confirmation dialog for deletion
+
+                return true;
+            // Respond to a click on the "Up" arrow button in the app bar
+            case android.R.id.home:
+                // If the pet hasn't changed, continue with navigating up to parent activity
+                // which is the {@link CatalogActivity}.
+                if (!mInventoryHasChanged) {
+                    NavUtils.navigateUpFromSameTask(DetailActivity.this);
+                    return true;
+                }
+
+                // Otherwise if there are unsaved changes, setup a dialog to warn the user.
+                // Create a click listener to handle the user confirming that
+                // changes should be discarded.
+                DialogInterface.OnClickListener discardButtonClickListener =
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                // User clicked "Discard" button, navigate to parent activity.
+                                NavUtils.navigateUpFromSameTask(DetailActivity.this);
+                            }
+                        };
+
+                // Show a dialog that notifies the user they have unsaved changes
+
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

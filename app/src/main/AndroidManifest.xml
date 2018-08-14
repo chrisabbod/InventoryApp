@@ -17,6 +17,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".DetailActivity"></activity>
+        <provider
+            android:name=".data.InventoryProvider"
+            android:authorities="com.example.android.inventoryapp"
+            android:exported="false" />
     </application>
 
 </manifest>
