@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CursorAdapter;
 import android.widget.TextView;
 
@@ -34,7 +35,7 @@ public class InventoryCursorAdapter extends CursorAdapter {
         int productPriceColumnIndex = cursor.getColumnIndex(InventoryEntry.COLUMN_PRODUCT_PRICE);
         int productQuantityColumnIndex = cursor.getColumnIndex(InventoryEntry.COLUMN_PRODUCT_QUANTITY);
 
-        // Read the pet attributes from the Cursor for the current pet
+        // Read the pet attributes from the Cursor for the current product
         String productName = cursor.getString(productNameColumnIndex);
         String productPrice = cursor.getString(productPriceColumnIndex);
         String productQuantity = cursor.getString(productQuantityColumnIndex);

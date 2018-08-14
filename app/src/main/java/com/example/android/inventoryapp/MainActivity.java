@@ -16,7 +16,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 
 import com.example.android.inventoryapp.data.InventoryContract.InventoryEntry;
@@ -33,7 +35,9 @@ public class MainActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Setup FAB to open EditorActivity
+
+
+        // Setup FAB to open DetailActivity
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,15 +47,15 @@ public class MainActivity extends AppCompatActivity implements
             }
         });
 
-        // Find the ListView which will be populated with the pet data
+        // Find the ListView which will be populated with the product data
         ListView inventoryListView = (ListView) findViewById(R.id.list);
 
         // Find and set empty view on the ListView, so that it only shows when the list has 0 items.
         View emptyView = findViewById(R.id.empty_view);
         inventoryListView.setEmptyView(emptyView);
 
-        // Setup an Adapter to create a list item for each row of pet data in the Cursor.
-        // There is no pet data yet (until the loader finishes) so pass in null for the Cursor.
+        // Setup an Adapter to create a list item for each row of product data in the Cursor.
+        // There is no product data yet (until the loader finishes) so pass in null for the Cursor.
         mCursorAdapter = new InventoryCursorAdapter(this, null);
         inventoryListView.setAdapter(mCursorAdapter);
 
@@ -64,15 +68,17 @@ public class MainActivity extends AppCompatActivity implements
 
                 // Form the content URI that represents the specific pet that was clicked on,
                 // by appending the "id" (passed as input to this method) onto the
-                // {@link PetEntry#CONTENT_URI}.
-                // For example, the URI would be "content://com.example.android.pets/pets/2"
-                // if the pet with ID 2 was clicked on.
-                Uri currentPetUri = ContentUris.withAppendedId(InventoryEntry.CONTENT_URI, id);
+                // {@link InventoryEntry#CONTENT_URI}.
+                // For example, the URI would be "content://com.example.android.inventoryapp/inventory/2"
+                // if the product with ID 2 was clicked on.
+                Uri currentInventoryUri = ContentUris.withAppendedId(InventoryEntry.CONTENT_URI, id);
 
                 // Set the URI on the data field of the intent
-                intent.setData(currentPetUri);
+                intent.setData(currentInventoryUri);
 
-                // Launch the {@link EditorActivity} to display the data for the current pet.
+                Toast.makeText(MainActivity.this, "LIST ITEM CLICKED!", Toast.LENGTH_SHORT).show();
+
+                // Launch the {@link EditorActivity} to display the data for the current product.
                 startActivity(intent);
             }
         });

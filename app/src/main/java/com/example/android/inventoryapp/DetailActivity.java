@@ -72,6 +72,9 @@ public class DetailActivity extends AppCompatActivity implements
         mSupplierName = (EditText)findViewById(R.id.edit_supplier_name);
         mSupplierNumber = (EditText)findViewById(R.id.edit_supplier_number);
 
+        // Setup OnTouchListeners on all the input fields, so we can determine if the user
+        // has touched or modified them. This will let us know if there are unsaved changes
+        // or not, if the user tries to leave the editor without saving.
         mProductName.setOnTouchListener(mTouchListener);
         mProductPrice.setOnTouchListener(mTouchListener);
         mProductQuantity.setOnTouchListener(mTouchListener);
