@@ -1,5 +1,6 @@
 package com.example.android.inventoryapp;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.app.LoaderManager;
 import android.content.ContentValues;
@@ -7,11 +8,13 @@ import android.content.CursorLoader;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -19,6 +22,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -38,6 +42,7 @@ public class DetailActivity extends AppCompatActivity implements
     private EditText mSupplierNumber;
     private ImageButton mSubtractQuantity;
     private ImageButton mAddQuantity;
+    private Button mCallSupplier;
 
     private int mSupplierNameUnknown = InventoryEntry.SUPPLIER_NAME_UNKNOWN;
 
@@ -78,6 +83,7 @@ public class DetailActivity extends AppCompatActivity implements
         mSupplierNumber = (EditText)findViewById(R.id.edit_supplier_number);
         mSubtractQuantity = (ImageButton)findViewById(R.id.subtract_button);
         mAddQuantity = (ImageButton)findViewById(R.id.add_button);
+        mCallSupplier = (Button)findViewById(R.id.call_supplier);
 
         // Setup OnTouchListeners on all the input fields, so we can determine if the user
         // has touched or modified them. This will let us know if there are unsaved changes
@@ -120,6 +126,17 @@ public class DetailActivity extends AppCompatActivity implements
 
                 getContentResolver().update(mCurrentInventoryUri, values, null, null);
                 mProductQuantity.setText(productQuantityString);
+            }
+        });
+
+        mCallSupplier.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String supplierNumber = mSupplierNumber.getText().toString();
+                Toast.makeText(DetailActivity.this, "PHONE NUMBER: " + supplierNumber, Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + supplierNumber));
+                startActivity(intent);
             }
         });
     }
