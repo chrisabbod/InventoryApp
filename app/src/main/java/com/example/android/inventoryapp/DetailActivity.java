@@ -8,8 +8,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -18,6 +20,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.android.inventoryapp.data.InventoryContract.InventoryEntry;
@@ -33,6 +36,8 @@ public class DetailActivity extends AppCompatActivity implements
     private EditText mProductQuantity;
     private EditText mSupplierName;
     private EditText mSupplierNumber;
+    private ImageButton mSubtractQuantity;
+    private ImageButton mAddQuantity;
 
     private int mSupplierNameUnknown = InventoryEntry.SUPPLIER_NAME_UNKNOWN;
 
@@ -71,6 +76,8 @@ public class DetailActivity extends AppCompatActivity implements
         mProductQuantity = (EditText)findViewById(R.id.edit_product_quantity);
         mSupplierName = (EditText)findViewById(R.id.edit_supplier_name);
         mSupplierNumber = (EditText)findViewById(R.id.edit_supplier_number);
+        mSubtractQuantity = (ImageButton)findViewById(R.id.subtract_button);
+        mAddQuantity = (ImageButton)findViewById(R.id.add_button);
 
         // Setup OnTouchListeners on all the input fields, so we can determine if the user
         // has touched or modified them. This will let us know if there are unsaved changes
@@ -80,12 +87,14 @@ public class DetailActivity extends AppCompatActivity implements
         mProductQuantity.setOnTouchListener(mTouchListener);
         mSupplierName.setOnTouchListener(mTouchListener);
         mSupplierNumber.setOnTouchListener(mTouchListener);
+        mSubtractQuantity.setOnTouchListener(mTouchListener);
+        mAddQuantity.setOnTouchListener(mTouchListener);
     }
 
     /**
      * Get user input from editor and save pet into database
      */
-    private void savePet(){
+    private void saveProduct(){
         //Read from input fields
         //Use trim to eliminate leading or trailing white space
         String productNameString = mProductName.getText().toString().trim();
@@ -131,7 +140,7 @@ public class DetailActivity extends AppCompatActivity implements
                         Toast.LENGTH_SHORT).show();
             }
         }else{
-            // Otherwise this is an EXISTING pet, so update the pet with content URI: mCurrentPetUri
+            // Otherwise this is an EXISTING product, so update the pet with content URI: mCurrentProductUri
             // and pass in the new ContentValues. Pass in null for the selection and selection args
             // because mCurrentPetUri will already identify the correct row in the database that
             // we want to modify.
@@ -180,7 +189,7 @@ public class DetailActivity extends AppCompatActivity implements
             // Respond to a click on the "Save" menu option
             case R.id.action_save:
                 // Save product to database
-                savePet();
+                saveProduct();
                 // Exit activity
                 finish();
                 return true;

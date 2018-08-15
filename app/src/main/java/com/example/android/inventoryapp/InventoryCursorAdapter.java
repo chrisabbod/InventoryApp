@@ -57,14 +57,21 @@ public class InventoryCursorAdapter extends CursorAdapter {
         salesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Uri currentInventoryUri = ContentUris.withAppendedId(InventoryEntry.CONTENT_URI, id);
-
+                Uri currentInventoryUri = ContentUris.withAppendedId(InventoryEntry.CONTENT_URI, id + 1);
+                //Uri currentInventoryUri = InventoryEntry.CONTENT_URI;
+                //TODO: Find the id of the selected list_item and assign it to the id variable to append it to the end of the URI
+                //and update the selected item
                 Toast.makeText(context, "BUTTON CLICKED " + currentInventoryUri, Toast.LENGTH_SHORT).show();
 
                 ContentValues values = new ContentValues();
                 values.put(InventoryEntry.COLUMN_PRODUCT_NAME, productName);
                 values.put(InventoryEntry.COLUMN_PRODUCT_PRICE, productPrice);
-                values.put(InventoryEntry.COLUMN_PRODUCT_QUANTITY, 2);
+
+                if(Integer.valueOf(productQuantity) > 0){
+                    values.put(InventoryEntry.COLUMN_PRODUCT_QUANTITY, Integer.valueOf(productQuantity) - 1);
+                }
+
+                //context.getContentResolver().insert(currentInventoryUri, values);
                 context.getContentResolver().update(currentInventoryUri, values, null, null);
                 //int productQuantityChange = context.getContentResolver().update(currentInventoryUri, values, null, null);
 
