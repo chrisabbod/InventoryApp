@@ -35,8 +35,6 @@ public class MainActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
         // Setup FAB to open DetailActivity
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -66,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements
                 // Create new intent to go to {@link EditorActivity}
                 Intent intent = new Intent(MainActivity.this, DetailActivity.class);
 
-                // Form the content URI that represents the specific pet that was clicked on,
+                // Form the content URI that represents the specific product that was clicked on,
                 // by appending the "id" (passed as input to this method) onto the
                 // {@link InventoryEntry#CONTENT_URI}.
                 // For example, the URI would be "content://com.example.android.inventoryapp/inventory/2"
@@ -105,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements
      */
     private void deleteInventory() {
         int rowsDeleted = getContentResolver().delete(InventoryEntry.CONTENT_URI, null, null);
-        Log.v("CatalogActivity", rowsDeleted + " rows deleted from pet database");
+        Log.v("MainActivity", rowsDeleted + " rows deleted from pet database");
     }
 
     @Override
@@ -151,7 +149,7 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void onLoadFinished(android.content.Loader<Cursor> loader, Cursor data) {
-        // Update {@link PetCursorAdapter} with this new cursor containing updated pet data
+        // Update {@link PetCursorAdapter} with this new cursor containing updated product data
         mCursorAdapter.swapCursor(data);
     }
 

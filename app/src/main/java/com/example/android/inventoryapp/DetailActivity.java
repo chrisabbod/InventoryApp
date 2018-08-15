@@ -144,7 +144,7 @@ public class DetailActivity extends AppCompatActivity implements
                         Toast.LENGTH_SHORT).show();
             } else {
                 // Otherwise, the update was successful and we can display a toast.
-                Toast.makeText(this, getString(R.string.detail_update_product_successful),
+                Toast.makeText(this, "TEST: " + mCurrentInventoryUri,
                         Toast.LENGTH_SHORT).show();
             }
         }
