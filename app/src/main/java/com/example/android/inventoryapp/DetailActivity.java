@@ -89,6 +89,39 @@ public class DetailActivity extends AppCompatActivity implements
         mSupplierNumber.setOnTouchListener(mTouchListener);
         mSubtractQuantity.setOnTouchListener(mTouchListener);
         mAddQuantity.setOnTouchListener(mTouchListener);
+
+        mSubtractQuantity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String productQuantityString = mProductQuantity.getText().toString().trim();
+
+                ContentValues values = new ContentValues();
+
+                if(Integer.valueOf(productQuantityString) > 0){
+                    values.put(InventoryEntry.COLUMN_PRODUCT_QUANTITY, Integer.valueOf(productQuantityString) - 1);
+                }
+
+                getContentResolver().update(mCurrentInventoryUri, values, null, null);
+                mProductQuantity.setText(productQuantityString);
+            }
+        });
+
+        mAddQuantity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String productQuantityString = mProductQuantity.getText().toString().trim();
+
+                ContentValues values = new ContentValues();
+
+                if(Integer.valueOf(productQuantityString) > 0){
+                    values.put(InventoryEntry.COLUMN_PRODUCT_QUANTITY, Integer.valueOf(productQuantityString) + 1);
+                }
+
+                getContentResolver().update(mCurrentInventoryUri, values, null, null);
+                mProductQuantity.setText(productQuantityString);
+            }
+        });
     }
 
     /**

@@ -36,7 +36,6 @@ public class InventoryCursorAdapter extends CursorAdapter {
         final TextView productQuantityTextView = (TextView)view.findViewById(R.id.quantity);
 
         // Find the columns of product attributes that we're interested in
-        final int productId = cursor.getColumnIndex(InventoryEntry._ID);
         final int productNameColumnIndex = cursor.getColumnIndex(InventoryEntry.COLUMN_PRODUCT_NAME);
         final int productPriceColumnIndex = cursor.getColumnIndex(InventoryEntry.COLUMN_PRODUCT_PRICE);
         int productQuantityColumnIndex = cursor.getColumnIndex(InventoryEntry.COLUMN_PRODUCT_QUANTITY);
@@ -58,10 +57,8 @@ public class InventoryCursorAdapter extends CursorAdapter {
             @Override
             public void onClick(View v) {
                 Uri currentInventoryUri = ContentUris.withAppendedId(InventoryEntry.CONTENT_URI, id + 1);
-                //Uri currentInventoryUri = InventoryEntry.CONTENT_URI;
-                //TODO: Find the id of the selected list_item and assign it to the id variable to append it to the end of the URI
-                //and update the selected item
-                Toast.makeText(context, "BUTTON CLICKED " + currentInventoryUri, Toast.LENGTH_SHORT).show();
+
+                //Toast.makeText(context, "BUTTON CLICKED " + currentInventoryUri, Toast.LENGTH_SHORT).show();
 
                 ContentValues values = new ContentValues();
                 values.put(InventoryEntry.COLUMN_PRODUCT_NAME, productName);
@@ -71,13 +68,8 @@ public class InventoryCursorAdapter extends CursorAdapter {
                     values.put(InventoryEntry.COLUMN_PRODUCT_QUANTITY, Integer.valueOf(productQuantity) - 1);
                 }
 
-                //context.getContentResolver().insert(currentInventoryUri, values);
                 context.getContentResolver().update(currentInventoryUri, values, null, null);
-                //int productQuantityChange = context.getContentResolver().update(currentInventoryUri, values, null, null);
-
                 productQuantityTextView.setText("Quantity: " + productQuantity);
-                //Toast.makeText(context, "Quantity for " + productName + " is: " + productQuantity, Toast.LENGTH_SHORT).show();
-
             }
         });
     }
