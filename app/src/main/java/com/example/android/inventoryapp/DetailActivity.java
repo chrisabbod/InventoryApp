@@ -120,7 +120,7 @@ public class DetailActivity extends AppCompatActivity implements
 
                 ContentValues values = new ContentValues();
 
-                if(Integer.valueOf(productQuantityString) > 0){
+                if(Integer.valueOf(productQuantityString) >= 0){
                     values.put(InventoryEntry.COLUMN_PRODUCT_QUANTITY, Integer.valueOf(productQuantityString) + 1);
                 }
 
@@ -203,7 +203,7 @@ public class DetailActivity extends AppCompatActivity implements
                         Toast.LENGTH_SHORT).show();
             } else {
                 // Otherwise, the update was successful and we can display a toast.
-                Toast.makeText(this, "TEST: " + mCurrentInventoryUri,
+                Toast.makeText(this, getString(R.string.detail_update_product_successful),
                         Toast.LENGTH_SHORT).show();
             }
         }
@@ -239,9 +239,21 @@ public class DetailActivity extends AppCompatActivity implements
             // Respond to a click on the "Save" menu option
             case R.id.action_save:
                 // Save product to database
-                saveProduct();
-                // Exit activity
-                finish();
+                if(mProductName.getText().toString().equals("")){
+                    Toast.makeText(this, "Please enter product name to continue", Toast.LENGTH_SHORT).show();
+                }else if(mProductPrice.getText().toString().equals("")){
+                    Toast.makeText(this, "Please enter product price to continue", Toast.LENGTH_SHORT).show();
+                }else if(mProductQuantity.getText().toString().equals("")){
+                    Toast.makeText(this, "Please enter product quantity to continue", Toast.LENGTH_SHORT).show();
+                }else if(mSupplierName.getText().toString().equals("")){
+                    Toast.makeText(this, "Please enter supplier name to continue", Toast.LENGTH_SHORT).show();
+                }else if(mSupplierNumber.getText().toString().equals("")){
+                    Toast.makeText(this, "Please enter supplier number to continue", Toast.LENGTH_SHORT).show();
+                }else{
+                    saveProduct();
+                    // Exit activity
+                    finish();
+                }
                 return true;
             // Respond to a click on the "Delete" menu option
             case R.id.action_delete:

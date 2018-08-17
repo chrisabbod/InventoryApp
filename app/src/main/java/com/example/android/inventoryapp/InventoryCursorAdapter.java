@@ -29,18 +29,20 @@ public class InventoryCursorAdapter extends CursorAdapter {
     }
 
     @Override
-    public void bindView(View view, final Context context, Cursor cursor){
+    public void bindView(View view, final Context context, final Cursor cursor){
         // Find individual views that we want to modify in the list item layout
         TextView productNameTextView = (TextView) view.findViewById(R.id.name);
         TextView productPriceTextView = (TextView) view.findViewById(R.id.price);
         final TextView productQuantityTextView = (TextView)view.findViewById(R.id.quantity);
 
         // Find the columns of product attributes that we're interested in
+        final int productIdColumnIndex = cursor.getColumnIndex(InventoryEntry._ID);
         final int productNameColumnIndex = cursor.getColumnIndex(InventoryEntry.COLUMN_PRODUCT_NAME);
         final int productPriceColumnIndex = cursor.getColumnIndex(InventoryEntry.COLUMN_PRODUCT_PRICE);
         int productQuantityColumnIndex = cursor.getColumnIndex(InventoryEntry.COLUMN_PRODUCT_QUANTITY);
 
         // Read the product attributes from the Cursor for the current product
+        final long productId = cursor.getLong(productIdColumnIndex);
         final String productName = cursor.getString(productNameColumnIndex);
         final String productPrice = cursor.getString(productPriceColumnIndex);
         final String productQuantity = cursor.getString(productQuantityColumnIndex);
@@ -50,15 +52,14 @@ public class InventoryCursorAdapter extends CursorAdapter {
         productPriceTextView.setText("$" + productPrice);
         productQuantityTextView.setText("Quantity: " + productQuantity);
 
-        final int id = cursor.getPosition();
-
         Button salesButton = (Button)view.findViewById(R.id.sale_button);
         salesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Uri currentInventoryUri = ContentUris.withAppendedId(InventoryEntry.CONTENT_URI, id + 1);
 
-                //Toast.makeText(context, "BUTTON CLICKED " + currentInventoryUri, Toast.LENGTH_SHORT).show();
+                Uri currentInventoryUri = ContentUris.withAppendedId(InventoryEntry.CONTENT_URI, productId);
+
+                //Toast.makeText(context, "BUTTON CLICKED " + productId, Toast.LENGTH_SHORT).show();
 
                 ContentValues values = new ContentValues();
                 values.put(InventoryEntry.COLUMN_PRODUCT_NAME, productName);
@@ -69,6 +70,7 @@ public class InventoryCursorAdapter extends CursorAdapter {
                 }
 
                 context.getContentResolver().update(currentInventoryUri, values, null, null);
+
                 productQuantityTextView.setText("Quantity: " + productQuantity);
             }
         });

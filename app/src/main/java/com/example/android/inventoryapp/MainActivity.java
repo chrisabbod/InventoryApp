@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements
                 // Set the URI on the data field of the intent
                 intent.setData(currentInventoryUri);
 
-                Toast.makeText(MainActivity.this, "LIST ITEM CLICKED!", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MainActivity.this, "LIST ITEM CLICKED!", Toast.LENGTH_SHORT).show();
 
                 // Launch the {@link EditorActivity} to display the data for the current product.
                 startActivity(intent);
